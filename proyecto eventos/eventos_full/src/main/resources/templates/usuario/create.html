@@ -1,0 +1,93 @@
+<html lang="en"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+    <h1>Crear nuevo Usuario</h1>
+    <form th:action="@{/usuarios/save}" th:object="${usuario}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}"
+                           id="nombre" placeholder="Escriba nombre del Usuario" required/>
+                    <span th:if="${#fields.hasErrors('nombre')}"
+                          th:errors="*{nombre}" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{apellido}"
+                           id="apellido" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-comtrol" th:field="*{email}"
+                           id="email" required/>
+                    <span th:errors="*{email}" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}"
+                           id="telefono" placeholder="9999-9999" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="rol">Rol</label>
+                    <select class="form-control"
+                            th:field="*{rol}"
+                            id="rol"
+                            required>
+
+                        <option value="">
+                            Seleccione un rol
+                        </option>
+
+                        <option th:each="rol : ${roles}"
+                                th:value="${rol.id}"
+                                th:text="${rol.nombre}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <select class="form-control"
+                            th:field="*{estado}"
+                            id="estado"
+                            required>
+
+                        <option value="true">
+                            Activo
+                        </option>
+
+                        <option value="false">
+                            Inactivo
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/usuarios}" class="btn btn-dark">Regresar</a>
+    </form>
+
+</div>
