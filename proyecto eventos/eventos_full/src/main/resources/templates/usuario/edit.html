@@ -1,0 +1,161 @@
+<html lang="es"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+
+    <h1>Editar Usuario</h1>
+
+    <form th:action="@{/usuarios/save}"
+          th:object="${usuario}"
+          method="post">
+
+
+        <input type="hidden" th:field="*{id}">
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="nombre">Nombre</label>
+
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{nombre}"
+                           id="nombre"
+                           placeholder="Escriba el nombre del usuario"
+                           required>
+
+                    <span th:if="${#fields.hasErrors('nombre')}"
+                          th:errors="*{nombre}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="apellido">Apellido</label>
+
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{apellido}"
+                           id="apellido"
+                           placeholder="Escriba el apellido del usuario"
+                           required>
+
+                    <span th:if="${#fields.hasErrors('apellido')}"
+                          th:errors="*{apellido}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="email">Email</label>
+
+                    <input type="email"
+                           class="form-control"
+                           th:field="*{email}"
+                           id="email"
+                           placeholder="correo@ejemplo.com"
+                           required>
+
+                    <span th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="telefono">Teléfono</label>
+
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{telefono}"
+                           id="telefono"
+                           placeholder="9999-9999"
+                           required>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="rol">Rol</label>
+
+                    <select class="form-control"
+                            th:field="*{rol}"
+                            id="rol"
+                            required>
+
+                        <option value="">
+                            Seleccione un rol
+                        </option>
+
+                        <option th:each="rol : ${roles}"
+                                th:value="${rol.id}"
+                                th:text="${rol.nombre}">
+                        </option>
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="estado">Estado</label>
+
+                    <select class="form-control"
+                            th:field="*{estado}"
+                            id="estado"
+                            required>
+
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <button type="submit"
+                class="btn btn-success">
+            Guardar cambios
+        </button>
+
+        <a th:href="@{/usuarios}"
+           class="btn btn-dark">
+            Regresar
+        </a>
+
+    </form>
+
+</div>

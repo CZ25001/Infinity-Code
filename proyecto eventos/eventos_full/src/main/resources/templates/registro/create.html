@@ -1,0 +1,153 @@
+<html lang="es"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+
+    <h1>Crear cuenta</h1>
+
+    <form th:action="@{/registro/save}"
+          th:object="${usuario}"
+          method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="nombre">Nombre</label>
+
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{nombre}"
+                           id="nombre"
+                           placeholder="Escriba su nombre"
+                           required/>
+
+                    <span th:if="${#fields.hasErrors('nombre')}"
+                          th:errors="*{nombre}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="apellido">Apellido</label>
+
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{apellido}"
+                           id="apellido"
+                           placeholder="Escriba su apellido"
+                           required/>
+
+                    <span th:if="${#fields.hasErrors('apellido')}"
+                          th:errors="*{apellido}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="email">Correo electrónico</label>
+
+                    <input type="email"
+                           class="form-control"
+                           th:field="*{email}"
+                           id="email"
+                           placeholder="ejemplo@gmail.com"
+                           required/>
+
+                    <span th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="telefono">Teléfono</label>
+
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{telefono}"
+                           id="telefono"
+                           placeholder="9999-9999"/>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="clave">Contraseña</label>
+
+                    <input type="password"
+                           class="form-control"
+                           th:field="*{clave}"
+                           id="clave"
+                           placeholder="Escriba su contraseña"
+                           required/>
+
+                    <span th:if="${#fields.hasErrors('clave')}"
+                          th:errors="*{clave}"
+                          class="text-danger">
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <label for="confirmarClave">
+                        Confirmar contraseña
+                    </label>
+
+                    <input type="password"
+                           class="form-control"
+                           id="confirmarClave"
+                           name="confirmarClave"
+                           placeholder="Repita su contraseña"
+                           required/>
+
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <button type="submit"
+                class="btn btn-primary">
+            Registrarse
+        </button>
+
+        <a th:href="@{/login}"
+           class="btn btn-dark">
+            Ya tengo una cuenta
+        </a>
+
+    </form>
+
+</div>
