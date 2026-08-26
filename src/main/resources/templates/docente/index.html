@@ -1,0 +1,71 @@
+<html lang="en"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+
+    <!-- Mostrar mensaje de confirmacion en caso de exio -->
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire(
+                {
+                    title : "Confirmacion",
+                    text: '[[${msg}]]',
+                    icon: "success"
+                }
+            );
+        </script>
+    </div>
+
+    <!-- Mostrar mensaje en caso de error -->
+    <div th:if="${error != null}">
+        <script>
+            Swal.fire(
+                {
+                    title : "Error",
+                    text: '[[${error}]]',
+                    icon: "error"
+                }
+            );
+        </script>
+    </div>
+
+    <h1>Listado de docentes</h1>
+    <a th:href="@{/docentes/create}" class="btn btn-outline-primary">Nuevo Grupo</a>
+    <table class = "table table-striped">
+        <thead>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>Escuela</th>
+        <th>Acciones</th>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${docentes}">
+            <td th:text="${item.getNombre()}"></td>
+            <td th:text="${item.getApellido()}"></td>
+            <td th:text="${item.getEmail()}"></td>
+            <td th:text="${item.getTelefono()}"></td>
+            <td th:text="${item.getEscuela()}"></td>
+            <td>
+                <a th:href="@{ /docentes/details/{id} (id= ${item.getId()}) }"
+                   class="btn btn-outline-primary">Detalles</a>
+                <a th:href="@{ /docentes/edit/{id} (id = ${item.getId()})  }"
+                   class="btn btn-outline-success">Editar</a>
+                <a th:href="@{ /docentes/remove/{id} (id = ${item.getId()})  }"
+                   class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                <a class="page-link" th:href="@{|/grupos?page=${pageNumber}|}"
+                   th:text = "${pageNumber}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
